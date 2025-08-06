@@ -101,8 +101,8 @@ export default function({ interruptPatterns = [], skipEmptyRows = true, colGroup
           let output = '<table>';
           if (colGroups) {
             output += '<colGroup>';
-            for (i = 0; i < token.header.length; i++) {
-              output += `<col class='column${i}' />`;
+            for (i = 0; i < Math.max(token.header?.map((header) => { return header.length; }) || 1); i++) {
+              output += `<col class='column${i + 1}' />`;
             }
             output += '</colGroup>';
           }
