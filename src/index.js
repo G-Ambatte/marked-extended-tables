@@ -1,4 +1,4 @@
-export default function({ interruptPatterns = [], skipEmptyRows = true } = {}) {
+export default function({ interruptPatterns = [], skipEmptyRows = true, colGroups = false } = {}) {
   return {
     extensions: [
       {
@@ -99,6 +99,13 @@ export default function({ interruptPatterns = [], skipEmptyRows = true } = {}) {
         renderer(token) {
           let i, j, row, cell, col, text;
           let output = '<table>';
+          if (colGroups) {
+            output += '<colGroup>';
+            for (i = 0; i < token.header.length; i++) {
+              output += `<col class='column${i}' />`;
+            }
+            output += '</colGroup>';
+          }
           output += '<thead>';
           for (i = 0; i < token.header.length; i++) {
             row = token.header[i];
